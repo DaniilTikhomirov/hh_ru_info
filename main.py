@@ -1,4 +1,5 @@
 import json
+from pprint import pprint
 
 from src.HH import HeadHunterAPI
 from src.JSONSaver import JSONSaver
@@ -13,16 +14,42 @@ from src.Vacancy import Vacancy
 # Сохранение информации о вакансиях в файл
 
 
-def full_data(tag: str):
-    hh_api = HeadHunterAPI()
-    hh_api.load_vacancies("Python developer")
-    hh_vacancies = hh_api.vacancies
-    json_saver = JSONSaver("info")
-    for element in hh_vacancies:
-        vacancy = Vacancy.build_vacancies(element)
-        json_saver.add_vacancy(vacancy)
+def full_data():
+    hh = HeadHunterAPI()
+    tag = input("Enter tag: ")
+    n = int(input("сколько страниц загрузить? max 20 "))
+    if 0 > n or n > 20:
+        print("error")
+    hh.load_vacancies(tag)
+    print("первые пять вакансий")
+    pprint(hh.vacancies[:6])
+    confirm = input("сохранить в json? Y/N ").lower()
+    if confirm == "y":
+        file_name = input("введите имя файла")
+        saver = JSONSaver(file_name)
+
+        print(f"сколько вакансий сохранить 0-{len(hh.vacancies)}")
+        while True:
+            num = int(input())
+            if 0 < num < len(hh.vacancies):
+                break
+            else:
+                print("не правильный номер попробуйте еще раз")
+        print("отсортировать вакансии? Y/N")
+        confirm = input().lower()
+        if confirm == "y":
+            vacancies = hh.get_top_vacancies(num)
+        else:
+            vacancies = hh.vacancies
+        for vacancy in range(num):
+            saver.add_vacancy(Vacancy.build_vacancies(vacancies[vacancy]))
+        print(f"данные сохранены в {file_name}.json")
 
 
 
 
 
+
+
+if __name__ == "__main__":
+    full_data()

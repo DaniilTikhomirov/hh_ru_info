@@ -1,3 +1,4 @@
+import copy
 from pprint import pprint
 
 import requests
@@ -34,19 +35,32 @@ class HeadHunterAPI(Parser):
     def __init__(self):
         self.__url = 'https://api.hh.ru/vacancies'
         self.__headers = {'User-Agent': 'HH-User-Agent'}
-        self.__params = {'text': '', 'page': 0, 'per_page': 100}
+        self.__params = {'text': '', 'page': 0, 'per_page': 100, 'search_fields': ['skills', 'title']}
         self.__vacancies = []
+        self.__ids = []
 
-    def load_vacancies(self, keyword: str):
-        self.__params['text'] = keyword
-        while self.__params.get('page') != 20:
-            response = requests.get(self.__url, headers=self.__headers, params=self.__params)
+    def __contains(self, vacancy: list):
+        for vac2 in vacancy:
+            if vac2['id'] not in self.__ids:
+                self.__ids.append(vac2['id'])
+                self.__vacancies.append(vac2)
+
+
+    def __connect_api(self):
+        response = requests.get(self.__url, headers=self.__headers, params=self.__params)
+        if response.status_code == 200:
             vacancies = response.json()['items']
-            self.__vacancies.extend(vacancies)
+            self.__contains(vacancies)
+
+    def load_vacancies(self, keyword: str, n = 5):
+        self.__params['text'] = keyword
+        while self.__params.get('page') != n:
+            self.__connect_api()
             self.__params['page'] += 1
+        print(sorted(self.__ids))
 
     @staticmethod
-    def config_key(x: dict, dict_currency: dict):
+    def __config_key(x: dict, dict_currency: dict):
         salary = x["salary"]
         if salary is None:
             return 0
@@ -76,11 +90,8 @@ class HeadHunterAPI(Parser):
              'INR', 'IDR', 'KZT', 'CAD', 'QAR', 'KGS', 'CNY', 'MDL', 'NZD', 'NOK', 'PLN', 'RON', 'XDR', 'SGD', 'TJS',
              'THB',
              'TRY', 'TMT', 'UZS', 'UAH', 'CZK', 'SEK', 'CHF', 'RSD', 'ZAR', 'KRW', 'JPY', 'RUB'])
-        sort_vacancies = sorted(self.__vacancies, key=lambda x: self.config_key(x, dict_currency), reverse=True)
-        new_vacancies = []
-        for i in range(n):
-            new_vacancies.append(sort_vacancies[n])
-        return new_vacancies
+        sort_vacancies = sorted(self.__vacancies, key=lambda x: self.__config_key(x, dict_currency), reverse=True)
+        return sort_vacancies[:n]
 
     def get_vacancies_for_descriptions_keyword(self, keyword, vacancy=None):
         if vacancy is None:

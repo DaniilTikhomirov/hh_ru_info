@@ -1,0 +1,38 @@
+[
+    {
+        "name": "Senior Java Engineer",
+        "salary": 12000,
+        "url": "https://hh.ru/vacancy/108465690",
+        "id": "108465690"
+    },
+    {
+        "name": "Руководитель направления по цифровой трансформации (фарма)",
+        "salary": 650000,
+        "url": "https://hh.ru/vacancy/107663037",
+        "id": "107663037"
+    },
+    {
+        "name": "Tech Lead",
+        "salary": 600000,
+        "url": "https://hh.ru/vacancy/108677230",
+        "id": "108677230"
+    },
+    {
+        "name": "Java-Developer (Банк)",
+        "salary": 600000,
+        "url": "https://hh.ru/vacancy/108308728",
+        "id": "108308728"
+    },
+    {
+        "name": "CTO (гибрид)",
+        "salary": 600000,
+        "url": "https://hh.ru/vacancy/107813017",
+        "id": "107813017"
+    },
+    {
+        "name": "SDET",
+        "salary": 5500,
+        "url": "https://hh.ru/vacancy/108573067",
+        "id": "108573067"
+    }
+]

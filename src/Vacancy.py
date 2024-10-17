@@ -3,18 +3,32 @@ import json
 
 
 class Vacancy:
+    __slots__ = ["__name", "__salary", "__url", "__id"]
 
     def __init__(self, name: str, salary: float, url: str, id_: str) -> None:
         self.__name = name
-        if salary is None:
-            salary = 0.0
-        self.__salary = salary
+        self.__salary = self.__salary_not_none(salary)
         self.__url = url
         self.__id = id_
 
     @staticmethod
+    def __salary_not_none(salary: float | None) -> float:
+        if salary is None:
+            return 0.0
+        return salary
+
+    @staticmethod
     def cast_to_object_list(vacancies: Any):
         return json.load(vacancies)
+
+    def __lt__(self, other: 'Vacancy') -> bool:
+        return self.salary < other.salary
+
+    def __gt__(self, other: 'Vacancy') -> bool:
+        return self.salary > other.salary
+
+    def __eq__(self, other: 'Vacancy') -> bool:
+        return self.salary == other.salary
 
     @classmethod
     def build_vacancies(cls, data: dict) -> 'Vacancy':
@@ -25,9 +39,7 @@ class Vacancy:
             else:
                 salary = salary.get('to')
 
-
-
-        return cls(data.get("alternate_url", "notFound"), salary,
+        return cls(data.get("name", "notFound"), salary,
                    data.get('alternate_url', "notFound"),
                    data.get('id', "notFound"))
 
