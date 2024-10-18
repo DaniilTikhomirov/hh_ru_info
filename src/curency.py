@@ -3,9 +3,6 @@ import xml.etree.ElementTree as ET
 from datetime import datetime
 from decimal import Decimal
 from pathlib import Path
-from typing import Any
-
-import requests
 
 from src.config_log import setting_log
 from src.utils import write_xml_from_web
@@ -60,7 +57,7 @@ CODE_CURRENCY = {
 }
 
 
-def get_currencies(currency: list) -> dict | bool | Any:
+def get_currencies(currency: list) -> dict:
     """
     находит в xml файле цену этой валюты в рублях
     :param currency: валюта
@@ -96,5 +93,3 @@ def get_currencies(currency: list) -> dict | bool | Any:
                 logger.info(f"good parse value is {str(value_currency)}")
                 list_currency[code] = value_currency
     return list_currency
-
-

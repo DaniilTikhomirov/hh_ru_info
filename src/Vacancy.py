@@ -1,8 +1,6 @@
-from typing import Any
-import json
-
-
 class Vacancy:
+    """класс вакансии"""
+
     __slots__ = ["__name", "__salary", "__url", "__id"]
 
     def __init__(self, name: str, salary: float, url: str, id_: str) -> None:
@@ -13,35 +11,30 @@ class Vacancy:
 
     @staticmethod
     def __salary_not_none(salary: float | None) -> float:
+        """валидатор зарплаты"""
         if salary is None:
             return 0.0
         return salary
 
-    @staticmethod
-    def cast_to_object_list(vacancies: Any):
-        return json.load(vacancies)
-
-    def __lt__(self, other: 'Vacancy') -> bool:
+    def __lt__(self, other: "Vacancy") -> bool:
         return self.salary < other.salary
 
-    def __gt__(self, other: 'Vacancy') -> bool:
+    def __gt__(self, other: "Vacancy") -> bool:
         return self.salary > other.salary
 
-    def __eq__(self, other: 'Vacancy') -> bool:
-        return self.salary == other.salary
-
     @classmethod
-    def build_vacancies(cls, data: dict) -> 'Vacancy':
-        salary = data.get('salary')
+    def build_vacancies(cls, data: dict) -> "Vacancy":
+        """преврощает словарь в вакансию"""
+        salary = data.get("salary")
         if salary is not None:
-            if salary.get('to') is None:
-                salary = salary.get('from')
+            if salary.get("to") is None:
+                salary = salary.get("from")
             else:
-                salary = salary.get('to')
+                salary = salary.get("to")
 
-        return cls(data.get("name", "notFound"), salary,
-                   data.get('alternate_url', "notFound"),
-                   data.get('id', "notFound"))
+        return cls(
+            data.get("name", "notFound"), salary, data.get("alternate_url", "notFound"), data.get("id", "notFound")
+        )
 
     @property
     def name(self) -> str:

@@ -1,4 +1,3 @@
-import json
 from pprint import pprint
 
 from src.HH import HeadHunterAPI
@@ -14,7 +13,7 @@ from src.Vacancy import Vacancy
 # Сохранение информации о вакансиях в файл
 
 
-def full_data():
+def full_data() -> None:
     hh = HeadHunterAPI()
     tag = input("Enter tag: ")
     n = int(input("сколько страниц загрузить? max 20 "))
@@ -44,11 +43,6 @@ def full_data():
         for vacancy in range(num):
             saver.add_vacancy(Vacancy.build_vacancies(vacancies[vacancy]))
         print(f"данные сохранены в {file_name}.json")
-
-
-
-
-
 
 
 if __name__ == "__main__":

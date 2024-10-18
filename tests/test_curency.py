@@ -1,5 +1,5 @@
 import xml.etree.ElementTree as ET
-from unittest.mock import Mock, patch
+from unittest.mock import patch
 
 import pytest
 
@@ -16,6 +16,7 @@ def data() -> str:
         <Nominal>1</Nominal>
         <Name>Доллар США</Name>
         <Value>74,3250</Value>
+        <VunitRate>74,3250</VunitRate>
     </Valute>
     <Valute ID="R01239">
         <NumCode>978</NumCode>
@@ -23,6 +24,7 @@ def data() -> str:
         <Nominal>1</Nominal>
         <Name>Евро</Name>
         <Value>90,1234</Value>
+        <VunitRate>90,1234</VunitRate>
     </Valute>
 </ValCurs>"""
 
@@ -39,7 +41,4 @@ def test_get_currencies(data: str) -> None:
             mock_file = mock_open.return_value.__enter__.return_value
             mock_file.read.return_value = data
             value = get_currencies(["USD", "EUR"])
-            assert value == [
-                {"currency": "USD", "rate": "74.3250"},
-                {"currency": "EUR", "rate": "90.1234"},
-            ]
+            assert value == {"USD": "74.3250", "EUR": "90.1234"}
