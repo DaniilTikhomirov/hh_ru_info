@@ -1,0 +1,92 @@
+[
+    {
+        "name": "Senior Java Engineer",
+        "salary": 12000,
+        "url": "https://hh.ru/vacancy/108465690",
+        "id": "108465690"
+    },
+    {
+        "name": "Browser Security Researcher / Исследователь безопасности браузеров",
+        "salary": 900000,
+        "url": "https://hh.ru/vacancy/108650305",
+        "id": "108650305"
+    },
+    {
+        "name": "Android Security Researcher / Исследователь безопасности Android",
+        "salary": 900000,
+        "url": "https://hh.ru/vacancy/107313436",
+        "id": "107313436"
+    },
+    {
+        "name": "C++ Intern in Berlin",
+        "salary": 7500,
+        "url": "https://hh.ru/vacancy/106765840",
+        "id": "106765840"
+    },
+    {
+        "name": "Руководитель направления по цифровой трансформации (фарма)",
+        "salary": 650000,
+        "url": "https://hh.ru/vacancy/107663037",
+        "id": "107663037"
+    },
+    {
+        "name": "Ведущий программист микроконтроллеров",
+        "salary": 6000,
+        "url": "https://hh.ru/vacancy/108243658",
+        "id": "108243658"
+    },
+    {
+        "name": "CTO (гибрид)",
+        "salary": 600000,
+        "url": "https://hh.ru/vacancy/107813017",
+        "id": "107813017"
+    },
+    {
+        "name": "Разработчик (Middle)",
+        "salary": 500000,
+        "url": "https://hh.ru/vacancy/105569426",
+        "id": "105569426"
+    },
+    {
+        "name": "Инженер-программист С/С++ (программист микроконтроллеров/Инженер-схемотехник)",
+        "salary": 500000,
+        "url": "https://hh.ru/vacancy/107472568",
+        "id": "107472568"
+    },
+    {
+        "name": "Python-разработчик",
+        "salary": 5000,
+        "url": "https://hh.ru/vacancy/108610051",
+        "id": "108610051"
+    },
+    {
+        "name": "Менеджер по работе с клиентами / IT продукт / В2В",
+        "salary": 5000,
+        "url": "https://hh.ru/vacancy/108501063",
+        "id": "108501063"
+    },
+    {
+        "name": "Программист С++",
+        "salary": 460000,
+        "url": "https://hh.ru/vacancy/108726176",
+        "id": "108726176"
+    },
+    {
+        "name": "Программист С++",
+        "salary": 460000,
+        "url": "https://hh.ru/vacancy/108726178",
+        "id": "108726178"
+    },
+    {
+        "name": "Программист С++",
+        "salary": 460000,
+        "url": "https://hh.ru/vacancy/108726179",
+        "id": "108726179"
+    },
+    {
+        "name": "Программист С++",
+        "salary": 460000,
+        "url": "https://hh.ru/vacancy/108726177",
+        "id": "108726177"
+    }
+]
